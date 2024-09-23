@@ -1,4 +1,50 @@
-// Script para o menu
+const salvar = async () => {
+    const productName = document.getElementById('productName').value;
+    const productCode = document.getElementById('productCode').value;
+    const productPrice = document.getElementById('productPrice').value;
+    console.log(productName)
+    console.log(productCode)
+    console.log(productPrice)
+
+    const data = {
+        productName: productName,
+        productCode: productCode,
+        productPrice: productPrice
+    }
+
+    const response = await fetch(`http://localhost:3000/api/usuarios`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    console.log(result);
+}
+
+const listar = async () => {
+    const response = await fetch(`http://localhost:3000/api/usuarios`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    const result = await response.json();
+
+    const tabelaUsuario = document.getElementById('tabelaUsuario');
+    result.forEach((usuario, index) => {                
+        var row = tabelaUsuario.insertRow(index + 1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+
+        cell1.innerHTML = usuario.id;
+        cell2.innerHTML = usuario.email;
+    });
+}
+
 var menuButton = document.getElementById("menu-button");
 var menu = document.getElementById("menu");
 var content = document.getElementById("content");
@@ -15,7 +61,7 @@ menuButton.addEventListener("click", function() {
     }
 });
 
-// Script para o modal e tabela de produtos
+
 const modal = document.getElementById('modal');
 const form = document.getElementById('addProductForm');
 const productTableBody = document.getElementById('productTableBody');
