@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="/pages/Lugares/lugares.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Teste</title>
+    <title>Avaliação</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
     <script>listar();</script>
@@ -79,9 +79,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="cadastro">Status</th>
-                                        <th scope="col" class="cadastro">Nome do Produto</th>
-                                        <th scope="col" class="cadastro">Código do Produto</th>
-                                        <th scope="col" class="cadastro">Preço</th>
+                                        <th scope="col" class="cadastro">Nome do Evento</th>
+                                        <th scope="col" class="cadastro">Endereço</th>
+                                        <th scope="col" class="cadastro">Avaliação</th>
                                         <th scope="col" class="cadastro">Ações</th>
                                     </tr>
                                 </thead>
@@ -107,16 +107,16 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="productName" class="form-label">Nome do Produto</label>
+                    <label for="productName" class="form-label">Nome do Evento</label>
                     <input type="text" class="form-control" id="productName" required>
                 </div>
                 <div class="mb-3">
-                    <label for="productCode" class="form-label">Código do Produto</label>
-                    <input type="number" class="form-control" id="productCode" required>
+                    <label for="productCode" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="productCode" required>
                 </div>
                 <div class="mb-3">
-                    <label for="productPrice" class="form-label">Preço</label>
-                    <input type="number" class="form-control" id="productPrice" step="0.01" required>
+                    <label for="productPrice" class="form-label">Avaliação</label>
+                    <input type="number" min="1" max="5" class="form-control" id="productPrice" step="0.01" required>
                 </div>
             </div>
             <div class="modal-footer justify-content-center gap-4">
