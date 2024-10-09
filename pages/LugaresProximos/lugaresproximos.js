@@ -35,3 +35,13 @@ document.getElementById('taverna-link').addEventListener('click', function (even
   event.preventDefault();
   updateMap('Taverna+do+Dragao');
 });
+
+document.getElementById('havana-link').addEventListener('click', function (event) {
+  event.preventDefault();
+  updateMap('Havana+Bar');
+});
+
+document.getElementById('cross-link').addEventListener('click', function (event) {
+  event.preventDefault();
+  updateMap('Crossroads');
+});

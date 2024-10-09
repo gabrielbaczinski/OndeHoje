@@ -92,15 +92,15 @@ function handleSubmit(event) {
     } else {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td style="width: 140px;">
+            <td style="width: 140px; background-color: black;">
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" onchange="statusProduct(this)">
                     <label class="form-check-label" style="margin-left: 17px">Inativo</label>
                 </div>
             </td>
-            <td style="text-align: center !important">${productName}</td>
-            <td style="text-align: center !important">${productCode}</td>
-            <td style="text-align: center !important">${parseFloat(productPrice).toFixed(2)}</td>
+            <td style="text-align: center !important;  color: white !important;">${productName}</td>
+            <td style="text-align: center !important;  color: white !important;">${productCode}</td>
+            <td style="text-align: center !important;  color: white !important;">${parseFloat(productPrice).toFixed(2)}</td>
             <td style="text-align: center !important">
                 <div class="btn-group">
                     <button class="btn btn-warning btn-sm" onclick="editProduct(this)">Editar</button>
