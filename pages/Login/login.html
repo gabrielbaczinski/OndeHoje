@@ -29,13 +29,13 @@
       </a>
     </div>
     <section class="w-100 p-4 d-flex justify-content-center pb-4" style="padding: 0 !important;">
-      <form style="width: 22rem;">
+      <form style="width: 22rem;" action="../TelaInicial/telainicial.html">
         <div data-mdb-input-init="" class="form-outline mb-4" data-mdb-input-initialized="true">
-          <input type="email" id="email" class="form-control">
-          <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
-          <div class="form-notch">
+          <input type="text" id="email" class="form-control" data-gtm-form-interact-field-id="0">
+            <label class="form-label" for="senha" style="margin-left: 0px;">Email</label>
+            <div class="form-notch">
             <div class="form-notch-leading" style="width: 9px;"></div>
-            <div class="form-notch-middle" style="width: 35px;"></div>
+            <div class="form-notch-middle" style="width: 40px;"></div>
             <div class="form-notch-trailing"></div>
           </div>
         </div>
@@ -49,14 +49,11 @@
               <div class="form-notch-trailing"></div>
             </div>
           </div>  
-
-
         </div>
         <label id="campoObrigatorio" class="labelValidacao">Os campos são obrigatórios</label>
         <label id="senhaTamanho" class="labelValidacao">A senha deve ter entre 8 e 16 dígitos</label>
         <label id="senhaPadrao" class="labelValidacao">A senha deve ter: 1 letra maíscula e 1 caractere especial</label>
 
-        <!-- 2 column grid layout for inline styling -->
          <br>
         <div class="row mb-4">
           <div class="col d-flex justify-content-center" style="padding-left: 37%;">
@@ -70,37 +67,33 @@
             <a style="text-decoration: none; color:  #2B4250;" href="/pages/EsqueceuSenha/esqueceuSenha.html">Esqueceu a senha?</a>
           </div>
         </div>
-
-        <!-- Submit button -->
         <button onclick="validarLogin()" id="botaoContinuar" style="width: 250px;" type="button" data-mdb-button-init=""
           data-mdb-ripple-init="" class="btn btn-primary btn-block mb-4"
           data-mdb-button-initialized="true">Continuar</button>
-
-        <!-- Register buttons -->
-        <div class="text-center">
-          <p>Sem conta? <a style="text-decoration: none; color:  #2B4250"; href="/pages/Cadastro/cadastro.html">Cadastre-se</a></p>
-          <p>ou logue com:</p>
-          <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-link btn-floating mx-1"
-            data-mdb-button-initialized="true">
-            <i style="color: white;" class="fab fa-facebook-f"></i>
-          </button>
-
-          <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-link btn-floating mx-1"
-            data-mdb-button-initialized="true">
-            <i style="color: white" class="fab fa-google"></i>
-          </button>
-
-          <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-link btn-floating mx-1"
-            data-mdb-button-initialized="true">
-            <i style="color: white" class="fab fa-twitter"></i>
-          </button>
-
-          <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-link btn-floating mx-1"
-            data-mdb-button-initialized="true">
-            <i style="color: white" class="fab fa-github"></i>
-          </button>
-        </div>
       </form>
+      <div class="text-center">
+        <p>Sem conta? <a style="text-decoration: none; color:  #2B4250"; href="/pages/Cadastro/cadastro.html">Cadastre-se</a></p>
+        <p>ou logue com:</p>
+        <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-link btn-floating mx-1"
+          data-mdb-button-initialized="true">
+          <i style="color: white;" class="fab fa-facebook-f"></i>
+        </button>
+
+        <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-link btn-floating mx-1"
+          data-mdb-button-initialized="true">
+          <i style="color: white" class="fab fa-google"></i>
+        </button>
+
+        <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-link btn-floating mx-1"
+          data-mdb-button-initialized="true">
+          <i style="color: white" class="fab fa-twitter"></i>
+        </button>
+
+        <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-link btn-floating mx-1"
+          data-mdb-button-initialized="true">
+          <i style="color: white" class="fab fa-github"></i>
+        </button>
+      </div>
     </section>
     <footer>
       <div class="container">
