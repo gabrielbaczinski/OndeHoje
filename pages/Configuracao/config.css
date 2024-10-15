@@ -1,0 +1,12 @@
+body {
+    background-color: rgb(26, 26, 26);
+    margin-top:20px;
+}
+
+#req p, li, h3, label {
+    color: rgb(212, 210, 210) !important;
+}
+
+.caixa-form input::placeholder{
+    color: grey !important;
+}
