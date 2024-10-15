@@ -92,10 +92,10 @@ function handleSubmit(event) {
     } else {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td style="width: 140px; background-color: black;">
+            <td style="width: 140px;">
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" onchange="statusProduct(this)">
-                    <label class="form-check-label" style="margin-left: 17px">Inativo</label>
+                    <label class="form-check-label" style="margin-left: 17px; color: white !important;">Inativo</label>
                 </div>
             </td>
             <td style="text-align: center !important;  color: white !important;">${productName}</td>
