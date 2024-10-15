@@ -10,3 +10,44 @@ body {
 .caixa-form input::placeholder{
     color: grey !important;
 }
+
+.avatar img {
+    margin-left: 15vw;
+}
+
+#botaoSalvar {
+    background-color: #2b4250;
+    border: 0;
+}
+
+#botaoSalvar:hover{
+    background-color:#233541;
+}
+
+#botaoSalvar:active{
+    background-color: #152027;
+}
+
+.menu-show {
+  width: 22vw;
+}
+
+#identificacao {
+    margin-top: 1vh;
+}
+
+#identificacao input::placeholder {
+    color: grey;
+}
+
+.botoes input {
+    height: 3.5vh;
+    width: 3.5vw !important;
+    cursor: pointer;
+}
+
+.botoes label {
+    font-size: 19px;
+    margin-left: 1vw;
+    margin-top: 0.5vh;
+}
