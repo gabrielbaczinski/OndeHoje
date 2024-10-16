@@ -9,8 +9,8 @@
 
 <html>
 <head>
-    <title>Clínica Médica ABC</title>
-    <link rel="icon" type="image/png" href="imagens/favicon.png"/>
+    <title>Estabelecimentos</title>
+    <link rel="icon" type="image/png" href="imagens/Logo.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/customize.css">
@@ -38,7 +38,7 @@
                 echo "</p> "
             ?>
             <div class="w3-container w3-theme">
-			<h2>Listagem de Medicos</h2>
+			<h2>Estabelecimentos cadastrados</h2>
 			</div>
 
             <!-- Acesso ao BD-->
@@ -61,58 +61,35 @@
                 mysqli_query($conn,'SET character_set_results=utf8');
 
                 // Faz Select na Base de Dados
-                $sql = "SELECT ID_Medico, CRM, Nome, Nome_Espec AS Especialidade, Foto, Dt_Nasc FROM Medico AS M INNER JOIN Especialidade AS E ON (M.ID_Espec = E.ID_Espec)  ORDER BY Nome";
+                $sql = "SELECT E.ID_evento, E.Nome, E.Endereco, A.Avaliacao, A.Comentario FROM evento AS E
+                 INNER JOIN avaliacao AS A ON (A.ID_rating = E.ID_rating)  ORDER BY E.Nome";
                 echo "<div class='w3-responsive w3-card-4'>";
                 if ($result = mysqli_query($conn, $sql)) {
                     echo "<table class='w3-table-all'>";
                     echo "	<tr>";
-                    echo "	  <th width='7%'>Código</th>";
-                    echo "	  <th width='14%'>CRM</th>";
-                    echo "	  <th width='14%'>Imagem</th>";
-                    echo "	  <th width='18%'>Médico</th>";
-                    echo "	  <th width='15%'>Especialidade</th>";
-                    echo "	  <th width='10%'>Nascimento</th>";
-                    echo "	  <th width='8%'>Idade</th>";
+                    echo "	  <th width='7%'>Status</th>";
+                    echo "	  <th width='18%'>Nome do Evento</th>";
+                    echo "	  <th width='18%'>Endereço</th>";
+                    echo "	  <th width='10%'>Avaliação</th>";
+                    echo "	  <th width='15%'>Comentário</th>";
                     echo "	  <th width='7%'> </th>";
                     echo "	  <th width='7%'> </th>";
                     echo "	</tr>";
                     if (mysqli_num_rows($result) > 0) {
                         // Apresenta cada linha da tabela
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $data = $row['Dt_Nasc'];
-                            list($ano, $mes, $dia) = explode('-', $data);
-                            $nova_data = $dia . '/' . $mes . '/' . $ano;
-                            // data atual
-                            $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
-                            // Descobre a unix timestamp da data de nascimento do fulano
-                            $nascimento = mktime( 0, 0, 0, $mes, $dia, $ano);
-                            // cálculo
-                            $idade = floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
-                            $cod = $row["ID_Medico"];
+                            $cod = $row["ID_evento"];
                             echo "<tr>";
                             echo "<td>";
                             echo $cod;
                             echo "</td><td>";
-                            echo $row["CRM"];
-                            if ($row['Foto']) {?>
-                                <td>
-                                    <img id="imagemSelecionada" class="w3-circle w3-margin-top" src="data:image/png;base64,<?= base64_encode($row['Foto']) ?>" />
-                                </td><td>
-                                <?php
-                            } else {
-                                ?>
-                                <td>
-                                    <img id="imagemSelecionada" class="w3-circle w3-margin-top" src="imagens/pessoa.jpg" />
-                                </td><td>
-                                <?php
-                            }
                             echo $row["Nome"];
                             echo "</td><td>";
-                            echo $row["Especialidade"];
+                            echo $row["Endereco"];
                             echo "</td><td>";
-                            echo $nova_data;
+                            echo $row["Avaliacao"];
                             echo "</td><td>";
-                            echo $idade;
+                            echo $row["Comentario"];
                             echo "</td>";
                             //Atualizar e Excluir registro de médicos
             ?>              <td>       
