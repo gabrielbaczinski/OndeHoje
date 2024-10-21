@@ -1,49 +1,143 @@
-const salvar = async () => {
+const modal = document.getElementById('modal');
+const form = document.getElementById('addProductForm');
+const productTableBody = document.getElementById('productTableBody');
+let currentEditingRow = null;
+
+// Função para abrir o modal
+function openModal() {
+    modal.showModal(); // Exibe o modal
+}
+
+// Função para fechar o modal
+function closeModal() {
+    modal.close(); // Fecha o modal
+    form.reset(); // Reseta o formulário
+    currentEditingRow = null; // Reseta a linha de edição
+}
+
+// Função para salvar ou atualizar os dados do formulário
+async function salvar(event) {
+    event.preventDefault();
+
     const productName = document.getElementById('productName').value;
     const productCode = document.getElementById('productCode').value;
     const productPrice = document.getElementById('productPrice').value;
-    console.log(productName)
-    console.log(productCode)
-    console.log(productPrice)
 
     const data = {
-        productName: productName,
-        productCode: productCode,
-        productPrice: productPrice
+        nome: productName,
+        endereco: productCode,
+        avaliacao: parseFloat(productPrice)
+    };
+
+    let url = 'http://localhost:3000/api/estabelecimentos';
+    let method = 'POST';
+
+    // Se estiver editando, envie uma requisição PUT para atualizar o item
+    if (currentEditingRow) {
+        const id = currentEditingRow.dataset.id;
+        url = `${url}/${id}`;
+        method = 'PUT';
     }
 
-    const response = await fetch(`http://localhost:3000/api/usuarios`, {
-        method: "POST",
+    // Enviar os dados para o servidor
+    const response = await fetch(url, {
+        method: method,
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
     });
+
     const result = await response.json();
-    console.log(result);
+
+    if (response.ok) {
+        // Atualizar a tabela com os dados atualizados
+        listar();
+        closeModal(); // Fecha o modal após salvar
+    } else {
+        console.error('Erro ao salvar:', result);
+    }
 }
 
-const listar = async () => {
-    const response = await fetch(`http://localhost:3000/api/usuarios`, {
-        method: "GET",
+// Função para listar os estabelecimentos e atualizar a tabela
+async function listar() {
+    const response = await fetch('http://localhost:3000/api/estabelecimentos', {
+        method: 'GET',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json'
         }
     });
+
     const result = await response.json();
 
-    const tabelaUsuario = document.getElementById('tabelaUsuario');
-    result.forEach((usuario, index) => {                
-        var row = tabelaUsuario.insertRow(index + 1);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
+    // Limpar a tabela antes de preencher novamente
+    productTableBody.innerHTML = '';
 
-        cell1.innerHTML = usuario.id;
-        cell2.innerHTML = usuario.email;
+    // Preencher a tabela com os dados obtidos
+    result.forEach(estabelecimento => {
+        const newRow = document.createElement('tr');
+        newRow.dataset.id = estabelecimento.id;
+        newRow.innerHTML = `
+            <td style="width: 140px;">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" onchange="statusProduct(this)">
+                    <label class="form-check-label" style="margin-left: 15%; color: white !important;">Inativo</label>
+                </div>
+            </td>
+            <td style="text-align: center !important; color: white !important;">${estabelecimento.nome}</td>
+            <td style="text-align: center !important; color: white !important;">${estabelecimento.endereco}</td>
+            <td style="text-align: center !important; color: white !important;">${estabelecimento.avaliacao.toFixed(2)}</td>
+            <td style="text-align: center !important">
+                <div class="btn-group">
+                    <button class="btn btn-warning btn-sm" onclick="editProduct(this)">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteProduct(this)">Excluir</button>
+                </div>
+            </td>
+        `;
+        productTableBody.appendChild(newRow);
     });
 }
+
+// Função para editar um estabelecimento
+function editProduct(button) {
+    const row = button.closest('tr');
+    document.getElementById('productName').value = row.cells[1].textContent;
+    document.getElementById('productCode').value = row.cells[2].textContent;
+    document.getElementById('productPrice').value = row.cells[3].textContent;
+    currentEditingRow = row;
+    openModal(); // Abre o modal para editar
+}
+
+// Função para excluir um estabelecimento
+async function deleteProduct(button) {
+    if (confirm('Tem certeza de que deseja excluir este produto?')) {
+        const row = button.closest('tr');
+        const id = row.dataset.id;
+
+        const response = await fetch(`http://localhost:3000/api/estabelecimentos/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            row.remove();
+        } else {
+            console.error('Erro ao excluir');
+        }
+    }
+}
+
+// Função para atualizar o status do produto
+function statusProduct(input) {
+    const label = input.nextElementSibling;
+    label.textContent = input.checked ? "Ativo" : "Inativo";
+}
+
+// Eventos de inicialização
+form.addEventListener('submit', salvar);
+document.addEventListener('DOMContentLoaded', listar);
 
 var menuButton = document.getElementById("menu-button");
 var menu = document.getElementById("menu");
@@ -60,83 +154,3 @@ menuButton.addEventListener("click", function() {
         content.classList.remove("content-expanded");
     }
 });
-
-
-const modal = document.getElementById('modal');
-const form = document.getElementById('addProductForm');
-const productTableBody = document.getElementById('productTableBody');
-let currentEditingRow = null;
-
-function openModal() {
-    modal.showModal();
-}
-
-function closeModal() {
-    modal.close();
-    form.reset();
-    currentEditingRow = null; 
-}
-
-function handleSubmit(event) {
-    event.preventDefault(); 
-
-    const productName = document.getElementById('productName').value;
-    const productCode = document.getElementById('productCode').value;
-    const productPrice = document.getElementById('productPrice').value;
-
-    if (currentEditingRow) {
-        currentEditingRow.cells[1].textContent = productName;
-        currentEditingRow.cells[2].textContent = productCode;
-        currentEditingRow.cells[3].textContent = parseFloat(productPrice).toFixed(2);
-        currentEditingRow = null;
-    } else {
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-            <td style="width: 140px;">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" onchange="statusProduct(this)">
-                    <label class="form-check-label" style="margin-left: 17px; color: white !important;">Inativo</label>
-                </div>
-            </td>
-            <td style="text-align: center !important;  color: white !important;">${productName}</td>
-            <td style="text-align: center !important;  color: white !important;">${productCode}</td>
-            <td style="text-align: center !important;  color: white !important;">${parseFloat(productPrice).toFixed(2)}</td>
-            <td style="text-align: center !important">
-                <div class="btn-group">
-                    <button class="btn btn-warning btn-sm" onclick="editProduct(this)">Editar</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteProduct(this)">Excluir</button>
-                </div>
-            </td>
-        `;
-        productTableBody.appendChild(newRow);
-    }
-
-    closeModal();
-}
-
-function statusProduct(input) {
-    const label = input.nextElementSibling;
-    if (input.checked) {
-        label.textContent = "Ativo";  
-    } else {
-        label.textContent = "Inativo"; 
-    }
-}
-
-function editProduct(button) {
-    const row = button.closest('tr');
-    document.getElementById('productName').value = row.cells[1].textContent;
-    document.getElementById('productCode').value = row.cells[2].textContent;
-    document.getElementById('productPrice').value = row.cells[3].textContent;
-    currentEditingRow = row;
-    openModal();
-}
-
-function deleteProduct(button) {
-    if (confirm('Tem certeza de que deseja excluir este produto?')) {
-        const row = button.closest('tr');
-        row.remove();
-    }
-}
-
-form.addEventListener('submit', handleSubmit);

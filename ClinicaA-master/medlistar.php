@@ -67,28 +67,28 @@
                 if ($result = mysqli_query($conn, $sql)) {
                     echo "<table class='w3-table-all'>";
                     echo "	<tr>";
-                    echo "	  <th width='7%'>Status</th>";
-                    echo "	  <th width='18%'>Nome do Evento</th>";
-                    echo "	  <th width='18%'>Endereço</th>";
-                    echo "	  <th width='10%'>Avaliação</th>";
-                    echo "	  <th width='15%'>Comentário</th>";
-                    echo "	  <th width='7%'> </th>";
-                    echo "	  <th width='7%'> </th>";
+                    echo "	  <th width='5%' style='text-align: center;'>ID</th>";
+                    echo "	  <th width='10%' style='text-align: center;'>Estabelecimento</th>";
+                    echo "	  <th width='20%' style='text-align: center;'>Endereço</th>";
+                    echo "	  <th width='5%' style='text-align: center;'>Avaliação</th>";
+                    echo "	  <th width='20%' style='text-align: center;'>Comentário</th>";
+                    echo "	  <th width='5%' style='text-align: center;'> </th>";
+                    echo "	  <th width='5%' style='text-align: center;'> </th>";
                     echo "	</tr>";
                     if (mysqli_num_rows($result) > 0) {
                         // Apresenta cada linha da tabela
                         while ($row = mysqli_fetch_assoc($result)) {
                             $cod = $row["ID_evento"];
-                            echo "<tr>";
-                            echo "<td>";
+                            echo "<tr style='text-align: center; font-size: small;'>";
+                            echo "<td style='text-align: center; font-size: small;'>";
                             echo $cod;
-                            echo "</td><td>";
+                            echo "</td><td style='text-align: center; font-size: small;'>";
                             echo $row["Nome"];
-                            echo "</td><td>";
+                            echo "</td><td style='text-align: center; font-size: small;'>";
                             echo $row["Endereco"];
-                            echo "</td><td>";
+                            echo "</td><td style='text-align: center; font-size: small;'>";
                             echo $row["Avaliacao"];
-                            echo "</td><td>";
+                            echo "</td><td style='text-align: center; font-size: small;'>";
                             echo $row["Comentario"];
                             echo "</td>";
                             //Atualizar e Excluir registro de médicos
