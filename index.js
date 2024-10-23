@@ -16,7 +16,7 @@ var con = mysql.createConnection({
     database: "OndeHoje"
 });
 
-//tentando connectar
+//tentando conectar
 //a variável con tem a conexão agora
 con.connect(function (err) {
     if (err) throw err;
@@ -24,13 +24,16 @@ con.connect(function (err) {
 });
 
 const produtos = [];
-
 let idUsuarios = 0;
 
 const router = express.Router();
+
+// Rota para listar todos os produtos
 router.get('/api/produtos', (req, res) => {
     res.status(200).json(produtos);
 });
+
+// Rota para adicionar um produto
 router.post('/api/produtos', (req, res) => {
     var produto = req.body;
     produto.id = 1;
@@ -38,22 +41,16 @@ router.post('/api/produtos', (req, res) => {
     res.status(201).json(produto);
 });
 
-//endpoint para listar todos os usuários
+// Endpoint para listar todos os usuários
 router.get('/api/usuarios', (req, res) => {
-    //cria a string the consulta no baco do tipo select
     let sql = "SELECT u.id, u.email, u.status FROM usuario u";
-    //executando o comando sql com a função query
-    //nela passamos a string de consulta
-    //após a execução ele retorna o function que vai ter a variável err e result
-    //se deu algum erro a variável err terá o erro obtivo
-    //caso contrário o result terá dos dados do banco 
     con.query(sql, function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
     });
 });
 
-//endpoint para salvar um usuário
+// Endpoint para salvar um usuário (criar ou atualizar)
 router.post('/api/usuarios', (req, res) => {
     var usuario = req.body;
     var sql = '';
@@ -63,7 +60,7 @@ router.post('/api/usuarios', (req, res) => {
         WHERE id = ${usuario.id}`;
     } else {
         sql = `INSERT INTO usuario (email, senha, status) VALUES 
-    ('${usuario.email}', '${usuario.senha}','${usuario.status ? 1 : 0}')`;
+    ('${usuario.email}', '${usuario.senha}', '${usuario.status ? 1 : 0}')`;
     }
     con.query(sql, function (err, result) {
         if (err) throw err;
@@ -71,10 +68,9 @@ router.post('/api/usuarios', (req, res) => {
     res.status(201).json(usuario);
 });
 
-//endpoint para capturar um usuário por id
+// Endpoint para capturar um usuário por id
 router.get('/api/usuarios/:id', (req, res) => {
-    const id = req.param("id");
-
+    const id = req.params.id;
     let sql = `SELECT u.id, u.email, u.status FROM usuario u WHERE u.id = ${id}`;
     con.query(sql, function (err, result) {
         if (err) throw err;
@@ -82,18 +78,38 @@ router.get('/api/usuarios/:id', (req, res) => {
     });
 });
 
-//endpoint para excluir um usuário
+// Endpoint para excluir um usuário
 router.delete('/api/usuarios/:id', (req, res) => {
-    const id = req.param("id");
-
+    const id = req.params.id;
     var sql = `DELETE FROM usuario WHERE id = ${id} `;
     con.query(sql, function (err, result) {
         if (err) throw err;
     });
-
-    res.status(200).send(`usuario com id ${id} excluído`);
+    res.status(200).send(`Usuario com id ${id} excluído`);
 });
 
+// Novo: Endpoint para fazer login e verificar as credenciais
+router.post('/api/login', (req, res) => {
+    const { email, senha } = req.body;
+    
+    // Verifica no banco de dados se o email e a senha correspondem a um usuário
+    let sql = `SELECT * FROM usuario WHERE email = '${email}' AND senha = '${senha}'`;
+    
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.error('Erro ao consultar o banco de dados:', err);
+            return res.status(500).json({ message: 'Erro no servidor' });
+        }
+
+        if (result.length > 0) {
+            // Se encontrou um usuário com as credenciais fornecidas, retorna sucesso
+            res.status(200).json({ message: 'Login bem-sucedido', usuario: result[0] });
+        } else {
+            // Senão, retorna erro de credenciais inválidas
+            res.status(401).json({ message: 'Credenciais inválidas' });
+        }
+    });
+});
 
 // Endpoint para listar todos os estabelecimentos
 router.get('/api/estabelecimentos', (req, res) => {
@@ -151,13 +167,14 @@ router.get('/api/estabelecimentos/:id', (req, res) => {
     });
 });
 
-
+// Definindo a rota principal
 app.use(router);
 
 app.get('/', (req, res) => {
-    res.redirect('/Login/login.html'); // Ajuste o caminho aqui
+    res.redirect('/TelaEntrada/telaentrada.html'); // Ajuste o caminho aqui
 });
 
+// Iniciando o servidor
 const port = 3000;
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

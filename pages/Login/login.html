@@ -42,7 +42,7 @@
         </div>
 
         <div data-mdb-input-init="" class="form-outline mb-4" data-mdb-input-initialized="true">
-          <input onkeyup="validarPadraoSenha(event)" type="password" id="senha" class="form-control"
+          <input onkeyup="validarSenha(event)" type="password" id="senha" class="form-control password-form"
             data-gtm-form-interact-field-id="0">
           <label class="form-label" for="senha" style="margin-left: 0px;">Senha</label>
           <div class="form-notch">
@@ -70,7 +70,7 @@
         senha?</a>
     </div>
   </div>
-  <button onclick="processarLogin(event)" id="botaoContinuar" style="width: 250px;" type="button"
+  <button onclick="enviarDados(event)" id="botaoContinuar" style="width: 250px;" type="button"
     data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-primary btn-block mb-4"
     data-mdb-button-initialized="true">Continuar</button>
   </form>

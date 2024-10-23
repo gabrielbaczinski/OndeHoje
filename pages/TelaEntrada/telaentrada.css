@@ -17,17 +17,21 @@
 }
 
 .menu-show {
-    display: block;
-  }
-  
-  .menu-hide {
-    display: none;
-  }
-  
-  .botao {
-    color: white;
-    border: 0px;
-    background-color: rgb(33, 37, 41);
-    font-size: 200%;
-    margin-right: 2%;
-  }
+  display: block;
+}
+
+.menu-hide {
+  display: none;
+}
+
+.botao {
+  color: white;
+  border: 0px;
+  background-color: rgb(33, 37, 41);
+  font-size: 200%;
+  margin-right: 2%;
+}
+
+.gradiente {
+  background: linear-gradient(180deg, #353535, #00000079);
+}

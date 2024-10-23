@@ -39,3 +39,9 @@ html{
     color: white; 
     background-color: rgb(26, 26, 26);
 }
+
+.labelValidacao {
+    display: none; /* Inicialmente escondido */
+    color: red;    /* Cor de destaque para o erro */
+  }
+  
