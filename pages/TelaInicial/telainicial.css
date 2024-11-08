@@ -17,11 +17,17 @@
 }
 
 .menu-show {
-  display: block;
+  width: 22vw;
 }
 
 .menu-hide {
   display: none;
+  width: 0;
+}
+
+.content-expanded {
+  width: 100% !important;
+  height: 90vh !important;
 }
 
 .botao {

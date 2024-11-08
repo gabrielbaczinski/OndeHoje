@@ -17,11 +17,17 @@
 }
 
 .menu-show {
-  display: block;
+  width: 22vw;
 }
 
 .menu-hide {
   display: none;
+  width: 0;
+}
+
+.content-expanded {
+  width: 100% !important;
+  height: 90vh !important;
 }
 
 .botao {
@@ -66,7 +72,7 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  background-color: #f8f9fa;
+  background-color: #000000;
 }
 
 .chat-header {
@@ -87,11 +93,11 @@
   padding: 10px;
   border-radius: 15px;
   width: fit-content;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 .message.user {
-  background-color: #d1e7dd;
+  background-color: #161616;
   align-self: flex-end;
 }
 
