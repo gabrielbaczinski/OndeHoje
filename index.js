@@ -13,7 +13,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "1234",
-    database: "OndeHoje"
+    database: "webdev"
 });
 
 //tentando conectar
@@ -42,30 +42,33 @@ router.post('/api/produtos', (req, res) => {
 });
 
 // Endpoint para listar todos os usuários
-router.get('/api/usuarios', (req, res) => {
-    let sql = "SELECT u.id, u.email, u.status FROM usuario u";
-    con.query(sql, function (err, result) {
+app.get('/api/usuarios', (req, res) => {
+    const sql = 'SELECT * FROM usuario';
+    con.query(sql, (err, result) => {
         if (err) throw err;
-        res.status(200).json(result);
+        res.json(result);
     });
 });
 
 // Endpoint para salvar um usuário (criar ou atualizar)
-router.post('/api/usuarios', (req, res) => {
-    var usuario = req.body;
-    var sql = '';
-    if (usuario.id) {
-        sql = `UPDATE usuario SET email = '${usuario.email}', 
-        senha = '${usuario.senha}', status = '${usuario.status ? 1 : 0}' 
-        WHERE id = ${usuario.id}`;
-    } else {
-        sql = `INSERT INTO usuario (email, senha, status) VALUES 
-    ('${usuario.email}', '${usuario.senha}', '${usuario.status ? 1 : 0}')`;
-    }
-    con.query(sql, function (err, result) {
+app.post('/api/usuarios', (req, res) => {
+    const { email, senha } = req.body;
+    const sql = 'INSERT INTO usuario (email, senha, status) VALUES (?, ?, ?)';
+    con.query(sql, [email, senha, 1], (err, result) => {
         if (err) throw err;
+        res.json({ id: result.insertId, email, senha });
     });
-    res.status(201).json(usuario);
+});
+
+// Endpoint para atualizar um usuário
+app.put('/api/usuarios/:id', (req, res) => {
+    const { id } = req.params;
+    const { email, senha } = req.body;
+    const sql = 'UPDATE usuario SET email = ?, senha = ? WHERE id = ?';
+    con.query(sql, [email, senha, id], (err, result) => {
+        if (err) throw err;
+        res.json({ id, email, senha });
+    });
 });
 
 // Endpoint para capturar um usuário por id
@@ -79,13 +82,13 @@ router.get('/api/usuarios/:id', (req, res) => {
 });
 
 // Endpoint para excluir um usuário
-router.delete('/api/usuarios/:id', (req, res) => {
-    const id = req.params.id;
-    var sql = `DELETE FROM usuario WHERE id = ${id} `;
-    con.query(sql, function (err, result) {
+app.delete('/api/usuarios/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = 'DELETE FROM usuario WHERE id = ?';
+    con.query(sql, [id], (err, result) => {
         if (err) throw err;
+        res.json({ message: 'Usuário excluído' });
     });
-    res.status(200).send(`Usuario com id ${id} excluído`);
 });
 
 // Novo: Endpoint para fazer login e verificar as credenciais

@@ -65,7 +65,7 @@ async function cadastrarUsuario(email, senha, status) {
     if (response.ok) {
       const data = await response.json();
       alert('Usuário cadastrado com sucesso!');
-      window.location.href = '/Tela Inicial/telainicial.html';
+      window.location.href = '/TelaInicial/telainicial.html';
     } else {
       alert('Erro ao cadastrar o usuário.');
     }
