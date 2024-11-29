@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: black;">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/Mensagem/mensagem.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mensagens</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        crossorigin="anonymous">
+    <style>
+        /* Estilos para a área de chat */
+    </style>
+</head>
+
+<header class="p-3 mb-3 bg-dark" style="margin-bottom: 0 !important;">
+    <div class="container" style="margin: 0; padding: 0;">
+        <div class="d-flex flex-wrap align-items-center justify-content-between" style="width: 100%;">
+            <button class="botao" id="menu-button">&#9776;</button>
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZpnGzv02KPPw4l9mn65ILN4oAxjK8gVNGmA&s"
+                    alt="" width="32" height="32" class="rounded-circle me-2" />
+            </a>
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 mx-auto" style="width: 60%;">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search" />
+            </form>
+        </div>
+    </div>
+</header>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="menu" class="col-md-3 menu-show kulim-park-regular" style="padding: 0%; width: 22%;">
+                <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="height: 90vh; width: 22vw;">
+                    <a href="/Perfil/perfil.html"
+                        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <img src="https://pbs.twimg.com/media/Evg99SnWQAM9Yb8.jpg" alt="" width="32" height="32"
+                            class="rounded-circle me-2" />
+                        <span class="fs-4">Seu Perfil</span>
+                    </a>
+                    <hr />
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item ">
+                            <a href="/TelaInicial/telainicial.html" class="nav-link selected text-white"
+                                aria-current="page">
+                                Início
+                            </a>
+                        </li>
+                        <li><a href="/Proximos/proximos.html" class="nav-link select text-white">Próximo a você</a></li>
+                        <li><a href="/Avaliacao/avaliacao.html" class="nav-link select text-white">Avalie</a></li>
+                        <li><a href="/Top Rolês/topRoles.html" class="nav-link select text-white">Top
+                                Rolês</a></li>
+                        <li><a href="#" class="nav-link selected active fw-bold">Mensagens</a></li>
+                        <li><a href="/Estabelecimentos/estabelecimentos.html"
+                                class="nav-link select text-white">Estabelecimentos</a></li>
+                    </ul>
+                    <hr />
+                    <div class="dropdown" style="margin-bottom: 8%;">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://pbs.twimg.com/media/Evg99SnWQAM9Yb8.jpg" alt="" width="32" height="32"
+                                class="rounded-circle me-2" />
+                            <strong>Opções</strong>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" href="/Usuarios/usuarios.html">Gerenciar Usuarios</a></li>
+                            <li><a class="dropdown-item" href="/Configuracao/config.html">Configurações</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <section id="content" class="p-0 d-flex koulen-regular"
+                style="background-color: rgb(26, 26, 26); width: 78%; height: 90vh; color: white;">
+                <div class="row ms-1">
+                    <div class="overflow-auto" style="width: 30%; height: 87vh; margin-right: 1%;">
+                        <h5 class="text-center mt-2">Suas conversas</h5>
+                        <section class="write-review bg-dark rounded p-0" id="write-review">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="d-flex align-items-center ps-2" style="height: 12vh;">
+                                                <img class="rounded-circle me-2" src="https://pbs.twimg.com/media/Evg99SnWQAM9Yb8.jpg" alt="" width="40" height="40"
+                                                    class="user-img" />
+                                                <div>
+                                                    <h5 class="text-left m-0 mb-1">Afonso</h5>
+                                                    <h6 class="text m-0" style="color: lightgray;">Re: Oi, como você está?</h6>
+                                                </div>
+                                            </div>
+                                            <hr style="margin: 0;">
+                                            <div class="d-flex align-items-center ps-2" style="height: 12vh;">
+                                                <img class="rounded-circle me-2" src="https://pbs.twimg.com/media/Evg99SnWQAM9Yb8.jpg" alt="" width="40" height="40"
+                                                    class="user-img" />
+                                                <div>
+                                                    <h5 class="text-left m-0 mb-1">Afonso</h5>
+                                                    <h6 class="text m-0" style="color: lightgray;">Re: Oi, como você está?</h6>
+                                                </div>
+                                            </div>
+                                            <hr style="margin: 0;">
+                                            <div class="d-flex align-items-center ps-2" style="height: 12vh;">
+                                                <img class="rounded-circle me-2" src="https://pbs.twimg.com/media/Evg99SnWQAM9Yb8.jpg" alt="" width="40" height="40"
+                                                    class="user-img" />
+                                                <div>
+                                                    <h5 class="text-left m-0 mb-1">Afonso</h5>
+                                                    <h6 class="text m-0" style="color: lightgray;">Re: Oi, como você está?</h6>
+                                                </div>
+                                            </div>
+                                            <hr style="margin: 0;">
+                                            <div class="d-flex align-items-center ps-2" style="height: 12vh;">
+                                                <img class="rounded-circle me-2" src="https://pbs.twimg.com/media/Evg99SnWQAM9Yb8.jpg" alt="" width="40" height="40"
+                                                    class="user-img" />
+                                                <div>
+                                                    <h5 class="text-left m-0 mb-1">Afonso</h5>
+                                                    <h6 class="text m-0" style="color: lightgray;">Re: Oi, como você está?</h6>
+                                                </div>
+                                            </div>
+                                            <hr style="margin: 0;">
+                                            <div class="d-flex align-items-center ps-2" style="height: 12vh;">
+                                                <img class="rounded-circle me-2" src="https://pbs.twimg.com/media/Evg99SnWQAM9Yb8.jpg" alt="" width="40" height="40"
+                                                    class="user-img" />
+                                                <div>
+                                                    <h5 class="text-left m-0 mb-1">Afonso</h5>
+                                                    <h6 class="text m-0" style="color: lightgray;">Re: Oi, como você está?</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                        </section>
+                    </div>
+                    <div class="row justify-content-center mt-2 " style="width: 70%; height: 85vh;">
+                        <div class="chat-container m-0 border-0 rounded bg-dark p-0" style="width: 100%; height: 100%;">
+                            <div class="chat-header rounded">
+                                <h5>Chat</h5>
+                            </div>
+                            <div class="chat-messages ">
+                            </div>
+                            <div class="chat-input ">
+                                <input type="text" class="form-control bg-dark rounded" placeholder="Digite uma mensagem..." />
+                                <button class="btn btn-primary ms-2 rounded">Enviar</button>
+                            </div>
+                        </div>
+            </section>
+        </div>
+    </div>
+    </section>
+    </div>
+    </div>
+    </section>
+
+    </div>
+    <script src="/Mensagem/mensagem.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+</body>
+
+
+</html>
